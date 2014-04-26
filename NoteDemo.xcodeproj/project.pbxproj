@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		6603A90F190C5FD80033CB0E /* Mogenerator */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6603A910190C5FD80033CB0E /* Build configuration list for PBXAggregateTarget "Mogenerator" */;
+			buildPhases = (
+				6603A913190C5FEC0033CB0E /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Mogenerator;
+			productName = Mogenerator;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		6603A8C6190C375D0033CB0E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6603A8C5190C375D0033CB0E /* Foundation.framework */; };
 		6603A8C8190C375D0033CB0E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6603A8C7190C375D0033CB0E /* CoreGraphics.framework */; };
@@ -27,6 +41,12 @@
 		6603A90C190C4F350033CB0E /* NTEConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A90B190C4F350033CB0E /* NTEConstants.m */; };
 		6603A90D190C50FD0033CB0E /* NTECoreDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A903190C448F0033CB0E /* NTECoreDataHandler.m */; };
 		6603A90E190C51C20033CB0E /* NTEConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A90B190C4F350033CB0E /* NTEConstants.m */; };
+		6603A920190C68460033CB0E /* _NTENote.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A91D190C68460033CB0E /* _NTENote.m */; };
+		6603A921190C68460033CB0E /* _NTENote.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A91D190C68460033CB0E /* _NTENote.m */; };
+		6603A922190C68460033CB0E /* NTENote.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A91F190C68460033CB0E /* NTENote.m */; };
+		6603A923190C68460033CB0E /* NTENote.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A91F190C68460033CB0E /* NTENote.m */; };
+		6603A92A190C78810033CB0E /* NTENoteHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A929190C78810033CB0E /* NTENoteHandler.m */; };
+		6603A92B190C78810033CB0E /* NTENoteHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A929190C78810033CB0E /* NTENoteHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +85,14 @@
 		6603A908190C4E990033CB0E /* NoteDemoModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoteDemoModel.xcdatamodel; sourceTree = "<group>"; };
 		6603A90A190C4F350033CB0E /* NTEConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTEConstants.h; sourceTree = "<group>"; };
 		6603A90B190C4F350033CB0E /* NTEConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTEConstants.m; sourceTree = "<group>"; };
+		6603A91C190C68460033CB0E /* _NTENote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _NTENote.h; path = Models/_NTENote.h; sourceTree = "<group>"; };
+		6603A91D190C68460033CB0E /* _NTENote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _NTENote.m; path = Models/_NTENote.m; sourceTree = "<group>"; };
+		6603A91E190C68460033CB0E /* NTENote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NTENote.h; path = Models/NTENote.h; sourceTree = "<group>"; };
+		6603A91F190C68460033CB0E /* NTENote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NTENote.m; path = Models/NTENote.m; sourceTree = "<group>"; };
+		6603A925190C6C180033CB0E /* NTECoreDataHandlerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NTECoreDataHandlerProtocol.h; sourceTree = "<group>"; };
+		6603A927190C78260033CB0E /* NTENoteHandlerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NTENoteHandlerProtocol.h; sourceTree = "<group>"; };
+		6603A928190C78810033CB0E /* NTENoteHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTENoteHandler.h; sourceTree = "<group>"; };
+		6603A929190C78810033CB0E /* NTENoteHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTENoteHandler.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +203,10 @@
 			isa = PBXGroup;
 			children = (
 				6603A907190C4E990033CB0E /* NoteDemoModel.xcdatamodeld */,
+				6603A91C190C68460033CB0E /* _NTENote.h */,
+				6603A91D190C68460033CB0E /* _NTENote.m */,
+				6603A91E190C68460033CB0E /* NTENote.h */,
+				6603A91F190C68460033CB0E /* NTENote.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -198,6 +230,8 @@
 		6603A900190C43120033CB0E /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				6603A925190C6C180033CB0E /* NTECoreDataHandlerProtocol.h */,
+				6603A927190C78260033CB0E /* NTENoteHandlerProtocol.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -207,6 +241,8 @@
 			children = (
 				6603A902190C448F0033CB0E /* NTECoreDataHandler.h */,
 				6603A903190C448F0033CB0E /* NTECoreDataHandler.m */,
+				6603A928190C78810033CB0E /* NTENoteHandler.h */,
+				6603A929190C78810033CB0E /* NTENoteHandler.m */,
 			);
 			name = Handlers;
 			sourceTree = "<group>";
@@ -279,6 +315,7 @@
 			targets = (
 				6603A8C1190C375D0033CB0E /* NoteDemo */,
 				6603A8E2190C375D0033CB0E /* NoteDemoTests */,
+				6603A90F190C5FD80033CB0E /* Mogenerator */,
 			);
 		};
 /* End PBXProject section */
@@ -304,16 +341,35 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6603A913190C5FEC0033CB0E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "mogenerator -m NoteDemo/NoteDemoModel.xcdatamodeld/NoteDemoModel.xcdatamodel -O NoteDemo/Models --template-var arc=true";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6603A8BE190C375D0033CB0E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6603A92A190C78810033CB0E /* NTENoteHandler.m in Sources */,
 				6603A8D6190C375D0033CB0E /* NTEAppDelegate.m in Sources */,
+				6603A922190C68460033CB0E /* NTENote.m in Sources */,
 				6603A8FF190C3CD30033CB0E /* NTENotesTableViewController.m in Sources */,
 				6603A8D2190C375D0033CB0E /* main.m in Sources */,
 				6603A909190C4E990033CB0E /* NoteDemoModel.xcdatamodeld in Sources */,
 				6603A904190C448F0033CB0E /* NTECoreDataHandler.m in Sources */,
+				6603A920190C68460033CB0E /* _NTENote.m in Sources */,
 				6603A90C190C4F350033CB0E /* NTEConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,8 +378,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6603A92B190C78810033CB0E /* NTENoteHandler.m in Sources */,
 				6603A8F1190C375D0033CB0E /* NoteDemoTests.m in Sources */,
+				6603A921190C68460033CB0E /* _NTENote.m in Sources */,
 				6603A90D190C50FD0033CB0E /* NTECoreDataHandler.m in Sources */,
+				6603A923190C68460033CB0E /* NTENote.m in Sources */,
 				6603A90E190C51C20033CB0E /* NTEConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -502,6 +561,20 @@
 			};
 			name = Release;
 		};
+		6603A911190C5FD80033CB0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6603A912190C5FD80033CB0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -531,6 +604,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		6603A910190C5FD80033CB0E /* Build configuration list for PBXAggregateTarget "Mogenerator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6603A911190C5FD80033CB0E /* Debug */,
+				6603A912190C5FD80033CB0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 

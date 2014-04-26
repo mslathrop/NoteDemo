@@ -40,7 +40,14 @@
         _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
         
         NSError *error = nil;
-        if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:self.storeURL options:nil error:&error]) {
+        if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+                                                       configuration:nil
+                                                                 URL:self.storeURL
+                                                             options:@{
+                                                                       NSMigratePersistentStoresAutomaticallyOption : @YES,
+                                                                       NSInferMappingModelAutomaticallyOption : @YES
+                                                                       }
+                                                               error:&error]) {
             NSLog(@"Error ocurred during creation of the persistentStoreCoordinator %@, %@", error, [error userInfo]);
             abort();
         }
@@ -66,6 +73,14 @@
     return _managedObjectModel;
 }
 
-
+- (void)saveManagedObjectContext {
+    if ([self.managedObjectContext hasChanges]) {
+        NSError *error = nil;
+        if (![self.managedObjectContext save:&error]) {
+            NSLog(@"Error occurred trying to save the managed object context %@, %@", error, [error userInfo]);
+            abort();
+        }
+    }
+}
 
 @end

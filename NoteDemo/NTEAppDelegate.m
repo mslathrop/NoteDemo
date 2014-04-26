@@ -10,9 +10,17 @@
 
 // Handlers
 #import "NTECoreDataHandler.h"
+#import "NTENoteHandler.h"
 
 // Other
 #import "NTEConstants.h"
+
+@interface NTEAppDelegate ()
+
+@property (strong, nonatomic) id<NTECoreDataHandlerProtocol> coreDataHandler;
+@property (strong, nonatomic) id<NTENoteHandlerProtocol> noteHandler;
+
+@end
 
 @implementation NTEAppDelegate
 
@@ -51,7 +59,7 @@
 
 # pragma mark - other methods
 
-- (NTECoreDataHandler *)coreDataHandler {
+- (id<NTECoreDataHandlerProtocol>)coreDataHandler {
     if (!_coreDataHandler) {
         NSURL* documentsDirectory = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory
                                                                            inDomain:NSUserDomainMask
@@ -66,6 +74,14 @@
     }
     
     return _coreDataHandler;
+}
+
+- (id<NTENoteHandlerProtocol>)noteHandler {
+    if (!_noteHandler) {
+        _noteHandler = [[NTENoteHandler alloc] init];
+    }
+    
+    return _noteHandler;
 }
 
 @end

@@ -10,13 +10,16 @@
 
 // Models
 #import "NTECoreDataHandler.h"
+#import "NTENoteHandler.h"
+#import "NTENote.h"
 
 // Other
 #import "NTEConstants.h"
 
 @interface NoteDemoTests : XCTestCase
 
-@property (nonatomic, strong) NTECoreDataHandler *coreDataHandler;
+@property (strong, nonatomic) id<NTECoreDataHandlerProtocol> coreDataHandler;
+@property (strong, nonatomic) id<NTENoteHandlerProtocol> noteHandler;
 
 @end
 
@@ -26,7 +29,9 @@
 {
     [super setUp];
     
+    [self resetCoreDataStack];
     [self setupCoreDataHandler];
+    self.noteHandler = [[NTENoteHandler alloc] init];
 }
 
 - (void)tearDown
@@ -34,6 +39,11 @@
     
     
     [super tearDown];
+}
+
+- (void)testExample
+{
+    //XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
 }
 
 #pragma mark - core data tests
@@ -54,24 +64,43 @@
     XCTAssertNotNil(self.coreDataHandler.persistentStoreCoordinator, @"persistentStoreCoordinator is nil");
 }
 
+#pragma mark - Note model tests
+- (void)testInsertAndRetrieveNewNote {
+    NSString *title = @"test";
+    NSString *body = @"test";
+    
+    NTENote *note = [self.noteHandler newNoteWithTitle:title body:body inManagedObjectContext:[self.coreDataHandler managedObjectContext]];
+    [self.coreDataHandler saveManagedObjectContext];
+    
+    NTENote *retrieved = [self.noteHandler retrieveNoteWithEntityId:note.entityId inManagedObjectContext:[self.coreDataHandler managedObjectContext]];
+    
+    XCTAssertNotNil(retrieved, @"retrieved is nil");
+    XCTAssertEqual(note.title, title, @"title was not saved correctly");
+    XCTAssertEqual(note.body, body, @"body was not saved correctly");
+}
+
 #pragma mark - helper methods
 
 - (void)setupCoreDataHandler {
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:kNTECoreDataModelName withExtension:@"momd"];
+    self.coreDataHandler = [[NTECoreDataHandler alloc] initWithStoreURL:[self testStoreURL] modelURL:modelURL];
+}
+
+- (void)resetCoreDataStack {
+    NSError *error = nil;
+    [self.coreDataHandler.persistentStoreCoordinator removePersistentStore:self.coreDataHandler.persistentStoreCoordinator.persistentStores[0] error:&error];
+    [[NSFileManager defaultManager] removeItemAtPath:[[self testStoreURL] path] error:&error];
+    self.coreDataHandler = nil;
+}
+
+- (NSURL *)testStoreURL {
     NSURL* documentsDirectory = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory
                                                                        inDomain:NSUserDomainMask
                                                               appropriateForURL:nil
                                                                          create:YES
                                                                           error:NULL];
     
-    NSURL *storeURL = [documentsDirectory URLByAppendingPathComponent:kNTECoreDataStoreTestName];
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:kNTECoreDataModelName withExtension:@"momd"];
-    
-    self.coreDataHandler = [[NTECoreDataHandler alloc] initWithStoreURL:storeURL modelURL:modelURL];
-}
-
-- (void)testExample
-{
-    //XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    return [documentsDirectory URLByAppendingPathComponent:kNTECoreDataStoreTestName];
 }
 
 @end

@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class NTECoreDataHandler;
+
 @interface NTEAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+/**
+ Lazily initializes and provides access to the core data stack
+ */
+@property (strong, nonatomic) NTECoreDataHandler *coreDataHandler;
 
 @end

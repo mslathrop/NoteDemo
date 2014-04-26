@@ -8,6 +8,12 @@
 
 #import "NTEAppDelegate.h"
 
+// Handlers
+#import "NTECoreDataHandler.h"
+
+// Other
+#import "NTEConstants.h"
+
 @implementation NTEAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -43,8 +49,23 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-# pragma mark - protocol methods
+# pragma mark - other methods
 
-
+- (NTECoreDataHandler *)coreDataHandler {
+    if (!_coreDataHandler) {
+        NSURL* documentsDirectory = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory
+                                                                           inDomain:NSUserDomainMask
+                                                                  appropriateForURL:nil
+                                                                             create:YES
+                                                                              error:NULL];
+        
+        NSURL *storeURL = [documentsDirectory URLByAppendingPathComponent:kNTECoreDataStoreProdName];
+        NSURL *modelURL = [[NSBundle mainBundle] URLForResource:kNTECoreDataModelName withExtension:@"momd"];
+        
+        _coreDataHandler = [[NTECoreDataHandler alloc] initWithStoreURL:storeURL modelURL:modelURL];
+    }
+    
+    return _coreDataHandler;
+}
 
 @end

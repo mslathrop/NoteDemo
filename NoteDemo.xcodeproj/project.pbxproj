@@ -14,13 +14,15 @@
 		6603A8D2190C375D0033CB0E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A8D1190C375D0033CB0E /* main.m */; };
 		6603A8D6190C375D0033CB0E /* NTEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A8D5190C375D0033CB0E /* NTEAppDelegate.m */; };
 		6603A8D9190C375D0033CB0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6603A8D7190C375D0033CB0E /* Main.storyboard */; };
-		6603A8DC190C375D0033CB0E /* NTEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A8DB190C375D0033CB0E /* NTEViewController.m */; };
 		6603A8DE190C375D0033CB0E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6603A8DD190C375D0033CB0E /* Images.xcassets */; };
 		6603A8E5190C375D0033CB0E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6603A8E4190C375D0033CB0E /* XCTest.framework */; };
 		6603A8E6190C375D0033CB0E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6603A8C5190C375D0033CB0E /* Foundation.framework */; };
 		6603A8E7190C375D0033CB0E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6603A8C9190C375D0033CB0E /* UIKit.framework */; };
 		6603A8EF190C375D0033CB0E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6603A8ED190C375D0033CB0E /* InfoPlist.strings */; };
 		6603A8F1190C375D0033CB0E /* NoteDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A8F0190C375D0033CB0E /* NoteDemoTests.m */; };
+		6603A8FF190C3CD30033CB0E /* NTENotesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A8FE190C3CD30033CB0E /* NTENotesTableViewController.m */; };
+		6603A904190C448F0033CB0E /* NTECoreDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A903190C448F0033CB0E /* NTECoreDataHandler.m */; };
+		6603A906190C44C40033CB0E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6603A905190C44C40033CB0E /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,14 +47,17 @@
 		6603A8D4190C375D0033CB0E /* NTEAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NTEAppDelegate.h; sourceTree = "<group>"; };
 		6603A8D5190C375D0033CB0E /* NTEAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NTEAppDelegate.m; sourceTree = "<group>"; };
 		6603A8D8190C375D0033CB0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6603A8DA190C375D0033CB0E /* NTEViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NTEViewController.h; sourceTree = "<group>"; };
-		6603A8DB190C375D0033CB0E /* NTEViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NTEViewController.m; sourceTree = "<group>"; };
 		6603A8DD190C375D0033CB0E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6603A8E3190C375D0033CB0E /* NoteDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoteDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6603A8E4190C375D0033CB0E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6603A8EC190C375D0033CB0E /* NoteDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NoteDemoTests-Info.plist"; sourceTree = "<group>"; };
 		6603A8EE190C375D0033CB0E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6603A8F0190C375D0033CB0E /* NoteDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoteDemoTests.m; sourceTree = "<group>"; };
+		6603A8FD190C3CD30033CB0E /* NTENotesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTENotesTableViewController.h; sourceTree = "<group>"; };
+		6603A8FE190C3CD30033CB0E /* NTENotesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTENotesTableViewController.m; sourceTree = "<group>"; };
+		6603A902190C448F0033CB0E /* NTECoreDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTECoreDataHandler.h; sourceTree = "<group>"; };
+		6603A903190C448F0033CB0E /* NTECoreDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTECoreDataHandler.m; sourceTree = "<group>"; };
+		6603A905190C44C40033CB0E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6603A906190C44C40033CB0E /* CoreData.framework in Frameworks */,
 				6603A8C8190C375D0033CB0E /* CoreGraphics.framework in Frameworks */,
 				6603A8CA190C375D0033CB0E /* UIKit.framework in Frameworks */,
 				6603A8C6190C375D0033CB0E /* Foundation.framework in Frameworks */,
@@ -101,6 +107,7 @@
 		6603A8C4190C375D0033CB0E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6603A905190C44C40033CB0E /* CoreData.framework */,
 				6603A8C5190C375D0033CB0E /* Foundation.framework */,
 				6603A8C7190C375D0033CB0E /* CoreGraphics.framework */,
 				6603A8C9190C375D0033CB0E /* UIKit.framework */,
@@ -115,8 +122,11 @@
 				6603A8D4190C375D0033CB0E /* NTEAppDelegate.h */,
 				6603A8D5190C375D0033CB0E /* NTEAppDelegate.m */,
 				6603A8D7190C375D0033CB0E /* Main.storyboard */,
-				6603A8DA190C375D0033CB0E /* NTEViewController.h */,
-				6603A8DB190C375D0033CB0E /* NTEViewController.m */,
+				6603A8FA190C3C7C0033CB0E /* Models */,
+				6603A8FC190C3C870033CB0E /* Controllers */,
+				6603A900190C43120033CB0E /* Protocols */,
+				6603A901190C44650033CB0E /* Handlers */,
+				6603A8FB190C3C830033CB0E /* Views */,
 				6603A8DD190C375D0033CB0E /* Images.xcassets */,
 				6603A8CC190C375D0033CB0E /* Supporting Files */,
 			);
@@ -150,6 +160,45 @@
 				6603A8ED190C375D0033CB0E /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6603A8FA190C3C7C0033CB0E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		6603A8FB190C3C830033CB0E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		6603A8FC190C3C870033CB0E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6603A8FD190C3CD30033CB0E /* NTENotesTableViewController.h */,
+				6603A8FE190C3CD30033CB0E /* NTENotesTableViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		6603A900190C43120033CB0E /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		6603A901190C44650033CB0E /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				6603A902190C448F0033CB0E /* NTECoreDataHandler.h */,
+				6603A903190C448F0033CB0E /* NTECoreDataHandler.m */,
+			);
+			name = Handlers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,8 +300,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6603A8D6190C375D0033CB0E /* NTEAppDelegate.m in Sources */,
-				6603A8DC190C375D0033CB0E /* NTEViewController.m in Sources */,
+				6603A8FF190C3CD30033CB0E /* NTENotesTableViewController.m in Sources */,
 				6603A8D2190C375D0033CB0E /* main.m in Sources */,
+				6603A904190C448F0033CB0E /* NTECoreDataHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +507,7 @@
 				6603A8F6190C375D0033CB0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6603A8F7190C375D0033CB0E /* Build configuration list for PBXNativeTarget "NoteDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +516,7 @@
 				6603A8F9190C375D0033CB0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

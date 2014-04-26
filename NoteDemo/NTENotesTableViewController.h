@@ -1,5 +1,5 @@
 //
-//  NTEViewController.h
+//  NTENotesTableViewController.h
 //  NoteDemo
 //
 //  Created by Matthew Lathrop on 4/26/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NTEViewController : UIViewController
+@interface NTENotesTableViewController : UITableViewController
 
 @end

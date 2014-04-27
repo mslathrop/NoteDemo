@@ -8,17 +8,7 @@
 
 #import "NTEAppDelegate.h"
 
-// Handlers
-#import "NTECoreDataHandler.h"
-#import "NTENoteHandler.h"
-
-// Other
-#import "NTEConstants.h"
-
 @interface NTEAppDelegate ()
-
-@property (strong, nonatomic) id<NTECoreDataHandlerProtocol> coreDataHandler;
-@property (strong, nonatomic) id<NTENoteHandlerProtocol> noteHandler;
 
 @end
 
@@ -55,33 +45,6 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-# pragma mark - other methods
-
-- (id<NTECoreDataHandlerProtocol>)coreDataHandler {
-    if (!_coreDataHandler) {
-        NSURL* documentsDirectory = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory
-                                                                           inDomain:NSUserDomainMask
-                                                                  appropriateForURL:nil
-                                                                             create:YES
-                                                                              error:NULL];
-        
-        NSURL *storeURL = [documentsDirectory URLByAppendingPathComponent:kNTECoreDataStoreProdName];
-        NSURL *modelURL = [[NSBundle mainBundle] URLForResource:kNTECoreDataModelName withExtension:@"momd"];
-        
-        _coreDataHandler = [[NTECoreDataHandler alloc] initWithStoreURL:storeURL modelURL:modelURL];
-    }
-    
-    return _coreDataHandler;
-}
-
-- (id<NTENoteHandlerProtocol>)noteHandler {
-    if (!_noteHandler) {
-        _noteHandler = [[NTENoteHandler alloc] init];
-    }
-    
-    return _noteHandler;
 }
 
 @end

@@ -8,6 +8,9 @@
 
 #import "NTENotesTableViewController.h"
 
+// Controllers
+#import "NTENoteDetailViewController.h"
+
 @interface NTENotesTableViewController ()
 
 @end
@@ -100,15 +103,14 @@
 }
 */
 
-/*
-#pragma mark - Navigation
+#pragma mark - navigation methods
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"seg_addNote"]) {
+        NTENoteDetailViewController *viewController = segue.destinationViewController;
+        viewController.noteDetailViewMode = NTENewNoteDetailViewMode;
+    }
 }
-*/
 
 @end

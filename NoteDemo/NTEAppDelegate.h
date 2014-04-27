@@ -8,22 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-// Protocols
-#import "NTECoreDataHandlerProtocol.h"
-#import "NTENoteHandlerProtocol.h"
-
 @interface NTEAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
-/**
- Lazily initializes and provides access to the core data handler
- */
-- (id<NTECoreDataHandlerProtocol>) coreDataHandler;
-
-/**
- Lazily initializes and provides access to the core data handler
- */
-- (id<NTENoteHandlerProtocol>) noteHandler;
 
 @end

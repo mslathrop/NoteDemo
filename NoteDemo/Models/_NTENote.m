@@ -5,7 +5,9 @@
 
 const struct NTENoteAttributes NTENoteAttributes = {
 	.body = @"body",
+	.createdAt = @"createdAt",
 	.entityId = @"entityId",
+	.modifiedAt = @"modifiedAt",
 	.title = @"title",
 };
 
@@ -55,7 +57,21 @@ const struct NTENoteFetchedProperties NTENoteFetchedProperties = {
 
 
 
+@dynamic createdAt;
+
+
+
+
+
+
 @dynamic entityId;
+
+
+
+
+
+
+@dynamic modifiedAt;
 
 
 

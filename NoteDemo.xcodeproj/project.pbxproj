@@ -47,6 +47,10 @@
 		6603A923190C68460033CB0E /* NTENote.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A91F190C68460033CB0E /* NTENote.m */; };
 		6603A92A190C78810033CB0E /* NTENoteHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A929190C78810033CB0E /* NTENoteHandler.m */; };
 		6603A92B190C78810033CB0E /* NTENoteHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A929190C78810033CB0E /* NTENoteHandler.m */; };
+		6603A93A190C8CEC0033CB0E /* NTENoteDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A939190C8CEC0033CB0E /* NTENoteDetailViewController.m */; };
+		6603A93B190C8CEC0033CB0E /* NTENoteDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A939190C8CEC0033CB0E /* NTENoteDetailViewController.m */; };
+		6603A93E190CB7460033CB0E /* NTEHandlerProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A93D190CB7460033CB0E /* NTEHandlerProvider.m */; };
+		6603A93F190CB7460033CB0E /* NTEHandlerProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A93D190CB7460033CB0E /* NTEHandlerProvider.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +97,10 @@
 		6603A927190C78260033CB0E /* NTENoteHandlerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NTENoteHandlerProtocol.h; sourceTree = "<group>"; };
 		6603A928190C78810033CB0E /* NTENoteHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTENoteHandler.h; sourceTree = "<group>"; };
 		6603A929190C78810033CB0E /* NTENoteHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTENoteHandler.m; sourceTree = "<group>"; };
+		6603A938190C8CEC0033CB0E /* NTENoteDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTENoteDetailViewController.h; sourceTree = "<group>"; };
+		6603A939190C8CEC0033CB0E /* NTENoteDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTENoteDetailViewController.m; sourceTree = "<group>"; };
+		6603A93C190CB7460033CB0E /* NTEHandlerProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTEHandlerProvider.h; sourceTree = "<group>"; };
+		6603A93D190CB7460033CB0E /* NTEHandlerProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTEHandlerProvider.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +229,8 @@
 		6603A8FC190C3C870033CB0E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6603A938190C8CEC0033CB0E /* NTENoteDetailViewController.h */,
+				6603A939190C8CEC0033CB0E /* NTENoteDetailViewController.m */,
 				6603A8FD190C3CD30033CB0E /* NTENotesTableViewController.h */,
 				6603A8FE190C3CD30033CB0E /* NTENotesTableViewController.m */,
 			);
@@ -239,6 +249,8 @@
 		6603A901190C44650033CB0E /* Handlers */ = {
 			isa = PBXGroup;
 			children = (
+				6603A93C190CB7460033CB0E /* NTEHandlerProvider.h */,
+				6603A93D190CB7460033CB0E /* NTEHandlerProvider.m */,
 				6603A902190C448F0033CB0E /* NTECoreDataHandler.h */,
 				6603A903190C448F0033CB0E /* NTECoreDataHandler.m */,
 				6603A928190C78810033CB0E /* NTENoteHandler.h */,
@@ -369,7 +381,9 @@
 				6603A8D2190C375D0033CB0E /* main.m in Sources */,
 				6603A909190C4E990033CB0E /* NoteDemoModel.xcdatamodeld in Sources */,
 				6603A904190C448F0033CB0E /* NTECoreDataHandler.m in Sources */,
+				6603A93A190C8CEC0033CB0E /* NTENoteDetailViewController.m in Sources */,
 				6603A920190C68460033CB0E /* _NTENote.m in Sources */,
+				6603A93E190CB7460033CB0E /* NTEHandlerProvider.m in Sources */,
 				6603A90C190C4F350033CB0E /* NTEConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,7 +395,9 @@
 				6603A92B190C78810033CB0E /* NTENoteHandler.m in Sources */,
 				6603A8F1190C375D0033CB0E /* NoteDemoTests.m in Sources */,
 				6603A921190C68460033CB0E /* _NTENote.m in Sources */,
+				6603A93F190CB7460033CB0E /* NTEHandlerProvider.m in Sources */,
 				6603A90D190C50FD0033CB0E /* NTECoreDataHandler.m in Sources */,
+				6603A93B190C8CEC0033CB0E /* NTENoteDetailViewController.m in Sources */,
 				6603A923190C68460033CB0E /* NTENote.m in Sources */,
 				6603A90E190C51C20033CB0E /* NTEConstants.m in Sources */,
 			);

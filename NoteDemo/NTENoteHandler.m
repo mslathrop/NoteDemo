@@ -20,6 +20,7 @@
     ret.body = body;
     ret.title = title;
     ret.entityId = [[NSUUID UUID] UUIDString];
+    ret.createdAt = ret.modifiedAt = [NSDate date];
     return ret;
 }
 

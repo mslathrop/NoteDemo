@@ -75,6 +75,8 @@
     NTENote *retrieved = [self.noteHandler retrieveNoteWithEntityId:note.entityId inManagedObjectContext:[self.coreDataHandler managedObjectContext]];
     
     XCTAssertNotNil(retrieved, @"retrieved is nil");
+    XCTAssertNotNil(note.createdAt, @"createdAt is nil");
+    XCTAssertNotNil(note.modifiedAt, @"modifiedAt is nil");
     XCTAssertEqual(note.title, title, @"title was not saved correctly");
     XCTAssertEqual(note.body, body, @"body was not saved correctly");
 }

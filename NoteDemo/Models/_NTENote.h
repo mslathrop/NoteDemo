@@ -6,7 +6,9 @@
 
 extern const struct NTENoteAttributes {
 	__unsafe_unretained NSString *body;
+	__unsafe_unretained NSString *createdAt;
 	__unsafe_unretained NSString *entityId;
+	__unsafe_unretained NSString *modifiedAt;
 	__unsafe_unretained NSString *title;
 } NTENoteAttributes;
 
@@ -15,6 +17,8 @@ extern const struct NTENoteRelationships {
 
 extern const struct NTENoteFetchedProperties {
 } NTENoteFetchedProperties;
+
+
 
 
 
@@ -44,11 +48,31 @@ extern const struct NTENoteFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSDate* createdAt;
+
+
+
+//- (BOOL)validateCreatedAt:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) NSString* entityId;
 
 
 
 //- (BOOL)validateEntityId:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSDate* modifiedAt;
+
+
+
+//- (BOOL)validateModifiedAt:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -80,8 +104,20 @@ extern const struct NTENoteFetchedProperties {
 
 
 
+- (NSDate*)primitiveCreatedAt;
+- (void)setPrimitiveCreatedAt:(NSDate*)value;
+
+
+
+
 - (NSString*)primitiveEntityId;
 - (void)setPrimitiveEntityId:(NSString*)value;
+
+
+
+
+- (NSDate*)primitiveModifiedAt;
+- (void)setPrimitiveModifiedAt:(NSDate*)value;
 
 
 

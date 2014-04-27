@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Notes Table View Controller - Notes-->
+        <!--Notes Table View Controller - All Notes-->
         <scene sceneID="qpN-J2-j7F">
             <objects>
                 <tableViewController id="5SZ-Fv-LPG" customClass="NTENotesTableViewController" sceneMemberID="viewController">
@@ -36,11 +36,81 @@
                             <outlet property="delegate" destination="5SZ-Fv-LPG" id="KMX-Yg-5K7"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Notes" id="Y5p-6f-PbK"/>
+                    <navigationItem key="navigationItem" title="All Notes" id="Y5p-6f-PbK">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="XW9-Md-4PW">
+                            <connections>
+                                <segue destination="Kt4-s7-8ee" kind="push" identifier="seg_addNote" id="NZm-Ia-BBw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9cy-CM-1Ta" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="599" y="-13"/>
+        </scene>
+        <!--Note Detail View Controller-->
+        <scene sceneID="zrv-wU-Hm6">
+            <objects>
+                <viewController id="Kt4-s7-8ee" customClass="NTENoteDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wAX-Dp-bo5"/>
+                        <viewControllerLayoutGuide type="bottom" id="FS0-lV-iFL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7Kg-Br-vHG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to edit body" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSJ-5O-n9C">
+                                <rect key="frame" x="15" y="112" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yAK-N5-zaR">
+                                <rect key="frame" x="15" y="67" width="290" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="GkS-HZ-QIE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="58S-d1-YB5">
+                                <rect key="frame" x="15" y="105" width="290" height="463"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Kt4-s7-8ee" id="u1L-89-gq0"/>
+                                </connections>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="yAK-N5-zaR" firstAttribute="top" secondItem="wAX-Dp-bo5" secondAttribute="bottom" constant="3" id="76M-aL-3pZ"/>
+                            <constraint firstItem="58S-d1-YB5" firstAttribute="top" secondItem="wAX-Dp-bo5" secondAttribute="bottom" constant="41" id="DSj-kR-7hD"/>
+                            <constraint firstItem="dSJ-5O-n9C" firstAttribute="leading" secondItem="58S-d1-YB5" secondAttribute="leading" id="EoU-oM-Bhi"/>
+                            <constraint firstItem="58S-d1-YB5" firstAttribute="centerX" secondItem="7Kg-Br-vHG" secondAttribute="centerX" id="F8L-Rf-Bgg"/>
+                            <constraint firstAttribute="trailing" secondItem="dSJ-5O-n9C" secondAttribute="trailing" constant="25" id="GjW-Hq-u4V"/>
+                            <constraint firstAttribute="trailing" secondItem="yAK-N5-zaR" secondAttribute="trailing" constant="15" id="Kxs-s2-Wvn"/>
+                            <constraint firstItem="dSJ-5O-n9C" firstAttribute="top" secondItem="wAX-Dp-bo5" secondAttribute="bottom" constant="48" id="QTt-od-hVc"/>
+                            <constraint firstAttribute="bottom" secondItem="58S-d1-YB5" secondAttribute="bottom" id="krW-l4-9MJ"/>
+                            <constraint firstItem="dSJ-5O-n9C" firstAttribute="leading" secondItem="yAK-N5-zaR" secondAttribute="leading" id="pEU-pf-g84"/>
+                            <constraint firstItem="yAK-N5-zaR" firstAttribute="leading" secondItem="7Kg-Br-vHG" secondAttribute="leading" constant="15" id="rQj-kL-Z8Y"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="E47-Hm-Gv7"/>
+                    <connections>
+                        <outlet property="bodyTextView" destination="58S-d1-YB5" id="PEm-8y-0iC"/>
+                        <outlet property="tapToEditLabel" destination="dSJ-5O-n9C" id="AYe-er-1xq"/>
+                        <outlet property="titleTextField" destination="yAK-N5-zaR" id="Wcl-36-9s0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jXx-8t-SDO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1077" y="-13"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="akO-1b-UiL">

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NTENotesTableViewController : UITableViewController
+@interface NTENotesTableViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 
 

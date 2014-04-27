@@ -13,8 +13,6 @@
 
 // Handlers
 #import "NTEHandlerProvider.h"
-#import "NTECoreDataHandler.h"
-#import "NTENoteHandler.h"
 
 @interface NTENoteDetailViewController ()
 
@@ -50,6 +48,8 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
     switch (self.noteDetailViewMode) {
         case NTENewNoteDetailViewMode:
             [self saveNewNote];
@@ -97,14 +97,14 @@
     NSString *trimmedTitle = [self.titleTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString *trimmedBody = [self.bodyTextView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
-    // don't create new note if there is no text
+    // don't create new note if there isn't text
     if ([trimmedTitle isEqualToString:@""] && [trimmedBody isEqualToString:@""]) {
         return;
     }
     
     // set default title if needed
     if ([trimmedTitle isEqualToString:@""]) {
-        trimmedTitle = [NSString stringWithFormat:@"New Note"];
+        trimmedTitle = [NSString stringWithFormat:@"Untitled"];
     }
     
     // create new note

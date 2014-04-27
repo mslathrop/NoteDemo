@@ -11,7 +11,17 @@
 // Controllers
 #import "NTENoteDetailViewController.h"
 
+// Handlers
+#import "NTEHandlerProvider.h"
+
+// Models
+#import "NTENote.h"
+
 @interface NTENotesTableViewController ()
+
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
@@ -21,7 +31,7 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        // Custom initialization
+        _managedObjectContext = [[NTEHandlerProvider coreDataHandler] managedObjectContext];
     }
     return self;
 }
@@ -29,12 +39,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self reloadFetchResults];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,65 +54,76 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+#pragma mark - table view data source methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.fetchedResultsController.sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return [self.fetchedResultsController.sections[section] numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *reuseIdentifier = @"ruid_noteCell";
     
+    NTENote *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    cell.textLabel.text = indexPath.description;
+    cell.textLabel.text = note.title;
     
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
-// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
+#pragma mark - fetched results controller methods
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+- (NSFetchedResultsController *)fetchedResultsController {
+    
+    if (!_fetchedResultsController) {
+        
+        // set up fetch request
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NTENote entityInManagedObjectContext:self.managedObjectContext];
+        [fetchRequest setEntity:entity];
+        
+        // sort notes by last updated
+        NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"modifiedAt" ascending:NO];
+        [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
+        [fetchRequest setFetchBatchSize:20];
+        
+        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                        managedObjectContext:self.managedObjectContext
+                                                                          sectionNameKeyPath:nil
+                                                                                   cacheName:@"allNotesFRCCache"];
+        _fetchedResultsController.delegate = self;
+    }
+    
+    return _fetchedResultsController;
 }
-*/
+
+- (void)reloadFetchResults {
+    NSError *error;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        // Update to handle the error appropriately.
+        NSLog(@"The ALl Notes fetched results controller encountered an error %@, %@", error, [error userInfo]);
+        abort();
+    }
+}
 
 #pragma mark - navigation methods
 

@@ -105,6 +105,7 @@
 		6603A93D190CB7460033CB0E /* NTEHandlerProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTEHandlerProvider.m; sourceTree = "<group>"; };
 		6603A940190D731E0033CB0E /* NTENoteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTENoteTableViewCell.h; sourceTree = "<group>"; };
 		6603A941190D731E0033CB0E /* NTENoteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTENoteTableViewCell.m; sourceTree = "<group>"; };
+		6603A944190D79840033CB0E /* NoteDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NoteDemo.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,10 +171,10 @@
 				6603A8D5190C375D0033CB0E /* NTEAppDelegate.m */,
 				6603A90A190C4F350033CB0E /* NTEConstants.h */,
 				6603A90B190C4F350033CB0E /* NTEConstants.m */,
-				6603A8FA190C3C7C0033CB0E /* Models */,
 				6603A8FC190C3C870033CB0E /* Controllers */,
-				6603A900190C43120033CB0E /* Protocols */,
 				6603A901190C44650033CB0E /* Handlers */,
+				6603A8FA190C3C7C0033CB0E /* Models */,
+				6603A900190C43120033CB0E /* Protocols */,
 				6603A8FB190C3C830033CB0E /* Views */,
 				6603A8DD190C375D0033CB0E /* Images.xcassets */,
 				6603A8CC190C375D0033CB0E /* Supporting Files */,
@@ -184,6 +185,7 @@
 		6603A8CC190C375D0033CB0E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6603A944190D79840033CB0E /* NoteDemo.entitlements */,
 				6603A8CD190C375D0033CB0E /* NoteDemo-Info.plist */,
 				6603A8CE190C375D0033CB0E /* InfoPlist.strings */,
 				6603A8D1190C375D0033CB0E /* main.m */,
@@ -313,6 +315,14 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Matt Lathrop";
 				TargetAttributes = {
+					6603A8C1190C375D0033CB0E = {
+						DevelopmentTeam = U379US498J;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
 					6603A8E2190C375D0033CB0E = {
 						TestTargetID = 6603A8C1190C375D0033CB0E;
 					};
@@ -524,10 +534,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = NoteDemo/NoteDemo.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NoteDemo/NoteDemo-Prefix.pch";
 				INFOPLIST_FILE = "NoteDemo/NoteDemo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -537,10 +551,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = NoteDemo/NoteDemo.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NoteDemo/NoteDemo-Prefix.pch";
 				INFOPLIST_FILE = "NoteDemo/NoteDemo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

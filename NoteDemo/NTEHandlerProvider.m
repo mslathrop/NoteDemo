@@ -47,7 +47,7 @@
         NSURL *storeURL = [documentsDirectory URLByAppendingPathComponent:kNTECoreDataStoreProdName];
         NSURL *modelURL = [[NSBundle mainBundle] URLForResource:kNTECoreDataModelName withExtension:@"momd"];
         
-        sharedInstance.coreDataHandler = [[NTECoreDataHandler alloc] initWithStoreURL:storeURL modelURL:modelURL];
+        sharedInstance.coreDataHandler = [[NTECoreDataHandler alloc] initWithStoreURL:storeURL modelURL:modelURL isiCloudEnabled:YES];
     }
     
     return sharedInstance.coreDataHandler;

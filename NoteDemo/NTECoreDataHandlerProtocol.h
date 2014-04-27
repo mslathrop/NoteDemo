@@ -20,8 +20,9 @@
  
  @param storeURL The URL pointing to the sqlite store on the device. The store will be created if it doesn't already exist at the specified location
  @param modelURL The URL pointing the xcdatamodel on the device. This must already exist
+ @param iCloudEnabled TRUE if the store should be created with iCloud sync support
  */
-- (instancetype)initWithStoreURL:(NSURL *)storeURL modelURL:(NSURL *)modelURL;
+- (instancetype)initWithStoreURL:(NSURL *)storeURL modelURL:(NSURL *)modelURL isiCloudEnabled:(BOOL)isiCloudEnabled;
 
 /**
  Saves the managed object context

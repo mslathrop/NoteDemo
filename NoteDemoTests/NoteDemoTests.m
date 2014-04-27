@@ -103,7 +103,7 @@
 
 - (void)setupCoreDataHandler {
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:kNTECoreDataModelName withExtension:@"momd"];
-    self.coreDataHandler = [[NTECoreDataHandler alloc] initWithStoreURL:[self testStoreURL] modelURL:modelURL];
+    self.coreDataHandler = [[NTECoreDataHandler alloc] initWithStoreURL:[self testStoreURL] modelURL:modelURL isiCloudEnabled:NO];
 }
 
 - (void)resetCoreDataStack {

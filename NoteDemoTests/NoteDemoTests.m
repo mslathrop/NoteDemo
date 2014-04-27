@@ -36,14 +36,7 @@
 
 - (void)tearDown
 {
-    
-    
     [super tearDown];
-}
-
-- (void)testExample
-{
-    //XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
 }
 
 #pragma mark - core data tests
@@ -81,25 +74,30 @@
     XCTAssertEqual(note.body, body, @"body was not saved correctly");
 }
 
-//- (void)testDeleteNote {
-//    NSString *title = @"test";
-//    NSString *body = @"test";
-//    
-//    // add the note
-//    NTENote *note = [self.noteHandler newNoteWithTitle:title body:body inManagedObjectContext:[self.coreDataHandler managedObjectContext]];
-//    [self.coreDataHandler saveManagedObjectContext];
-//    
-//    // retrive it
-//    NTENote *retrieved = [self.noteHandler retrieveNoteWithEntityId:note.entityId inManagedObjectContext:[self.coreDataHandler managedObjectContext]];
-//    XCTAssertNotNil(retrieved, @"retrieved is nil");
-//    XCTAssertNotNil(note.createdAt, @"createdAt is nil");
-//    XCTAssertNotNil(note.modifiedAt, @"modifiedAt is nil");
-//    XCTAssertEqual(note.title, title, @"title was not saved correctly");
-//    XCTAssertEqual(note.body, body, @"body was not saved correctly");
-//    
-//    // delete it
-//    
-//}
+- (void)testDeleteNote {
+    NSString *title = @"test";
+    NSString *body = @"test";
+    
+    // add the note
+    NTENote *note = [self.noteHandler newNoteWithTitle:title body:body inManagedObjectContext:[self.coreDataHandler managedObjectContext]];
+    [self.coreDataHandler saveManagedObjectContext];
+    
+    // retrive it
+    NTENote *retrieved = [self.noteHandler retrieveNoteWithEntityId:note.entityId inManagedObjectContext:[self.coreDataHandler managedObjectContext]];
+    XCTAssertNotNil(retrieved, @"retrieved is nil");
+    XCTAssertNotNil(note.createdAt, @"createdAt is nil");
+    XCTAssertNotNil(note.modifiedAt, @"modifiedAt is nil");
+    XCTAssertEqual(note.title, title, @"title was not saved correctly");
+    XCTAssertEqual(note.body, body, @"body was not saved correctly");
+    
+    // delete it
+    [self.noteHandler deleteNote:retrieved inManagedObjectContext:[self.coreDataHandler managedObjectContext]];
+    [self.coreDataHandler saveManagedObjectContext];
+    
+    // retrive it
+    retrieved = [self.noteHandler retrieveNoteWithEntityId:note.entityId inManagedObjectContext:[self.coreDataHandler managedObjectContext]];
+    XCTAssertNil(retrieved, @"retrieved was not nil");
+}
 
 #pragma mark - helper methods
 

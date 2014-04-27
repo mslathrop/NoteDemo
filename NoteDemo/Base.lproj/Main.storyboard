@@ -96,7 +96,7 @@
                                     <constraint firstAttribute="height" constant="46" id="GkS-HZ-QIE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="58S-d1-YB5">
                                 <rect key="frame" x="15" y="105" width="290" height="463"/>

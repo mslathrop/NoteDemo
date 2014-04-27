@@ -36,22 +36,14 @@
     return self;
 }
 
+#pragma mark - view lifecycle methods
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     
     [self reloadFetchResults];
     [self.tableView reloadData];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - table view data source methods
@@ -69,11 +61,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *reuseIdentifier = @"ruid_noteCell";
-    
-    NTENote *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    cell.textLabel.text = note.title;
+    [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
 }
@@ -85,9 +74,76 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    NTENote *selectedNote = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [[NTEHandlerProvider noteHandler] deleteNote:selectedNote inManagedObjectContext:[[NTEHandlerProvider coreDataHandler] managedObjectContext]];
+    [[NTEHandlerProvider coreDataHandler] saveManagedObjectContext];
+}
+
+#pragma mark - cell drawing methods
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    NTENote *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = note.title;
+}
+
+#pragma mark - fetched results controller delegate methods
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+  didChangeSection:(id )sectionInfo
+           atIndex:(NSUInteger)sectionIndex
+     forChangeType:(NSFetchedResultsChangeType)type {
+    
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                          withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                          withRowAnimation:UITableViewRowAnimationFade];
+            break;
     }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath]
+                    atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView endUpdates];
 }
 
 #pragma mark - fetched results controller methods
@@ -119,8 +175,7 @@
 - (void)reloadFetchResults {
     NSError *error;
     if (![self.fetchedResultsController performFetch:&error]) {
-        // Update to handle the error appropriately.
-        NSLog(@"The ALl Notes fetched results controller encountered an error %@, %@", error, [error userInfo]);
+        NSLog(@"The All Notes fetched results controller encountered an error %@, %@", error, [error userInfo]);
         abort();
     }
 }
@@ -132,6 +187,13 @@
     if ([segue.identifier isEqualToString:@"seg_addNote"]) {
         NTENoteDetailViewController *viewController = segue.destinationViewController;
         viewController.noteDetailViewMode = NTENewNoteDetailViewMode;
+    }
+    else if ([segue.identifier isEqualToString:@"seg_viewNote"]) {
+        NTENote *selectedNote = [self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForSelectedRow]];
+        
+        NTENoteDetailViewController *viewController = segue.destinationViewController;
+        viewController.noteDetailViewMode = NTEViewNoteDetailViewMode;
+        viewController.existingNote = selectedNote;
     }
 }
 

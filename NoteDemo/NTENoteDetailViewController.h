@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class NTENote;
+
 @interface NTENoteDetailViewController : UIViewController <UITextViewDelegate>
 
 /**
@@ -25,6 +27,11 @@ typedef enum {
  need to be shown dependin
  */
 @property NTENoteDetailViewMode noteDetailViewMode;
+
+/**
+ The existing note that is currently being viewed or edited
+ */
+@property (strong, nonatomic) NTENote *existingNote;
 
 
 // IB properties /////////////////////////////////////////////////////////////////////////

@@ -52,6 +52,13 @@
     return ret;
 }
 
+- (void)deleteNote:(NTENote *)note inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+    NSAssert(note != nil, @"note cannot be null");
+    NSAssert(managedObjectContext != nil, @"managedObjectContext cannot be null");
+    
+    [managedObjectContext deleteObject:note];
+}
+
 #pragma mark - private methods
 
 - (NSArray *)performFetchRequest:(NSFetchRequest *)fetchRequest inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {

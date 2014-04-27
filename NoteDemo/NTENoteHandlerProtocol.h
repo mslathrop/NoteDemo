@@ -29,4 +29,12 @@
  */
 - (NTENote *)retrieveNoteWithEntityId:(NSString *)entityId inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 
+/**
+ Deletes (permanently) an existing note inside the specified managed object context
+ 
+ @param note The note that will be permanently deleted
+ @param managedObjectContext The managed object context that the entity will be created in
+ */
+- (void)deleteNote:(NTENote *)note inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+
 @end

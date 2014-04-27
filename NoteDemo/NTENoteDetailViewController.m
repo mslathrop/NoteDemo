@@ -56,6 +56,7 @@
             break;
             
         case NTEViewNoteDetailViewMode:
+            [self saveExistingNote];
             break;
             
         case NTEEditDetailViewMode:
@@ -72,23 +73,31 @@
     NSAssert(self.noteDetailViewMode != NTENilDetailViewMode, @"Trying to load note detail view loaded without the mode being set");
     
     [self configureNavigationItems];
+    [self configureTextControls];
 }
 
 - (void)configureNavigationItems {
     switch (self.noteDetailViewMode) {
-        case NTENewNoteDetailViewMode:
-            // nothing needed
-            break;
-            
-        case NTEViewNoteDetailViewMode:
-            break;
-            
         case NTEEditDetailViewMode:
             break;
             
         default:
             break;
     }
+}
+
+- (void)configureTextControls {
+    switch (self.noteDetailViewMode) {
+        case NTEViewNoteDetailViewMode:
+            self.titleTextField.text = self.existingNote.title;
+            self.bodyTextView.text = self.existingNote.body;
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self hideTapToEditLabelIfNeeded];
 }
 
 #pragma mark - new mode methods
@@ -109,12 +118,52 @@
     
     // create new note
     [[NTEHandlerProvider noteHandler] newNoteWithTitle:trimmedTitle
-                                                 body:trimmedBody
-                               inManagedObjectContext:[[NTEHandlerProvider coreDataHandler] managedObjectContext]];
+                                                  body:trimmedBody
+                                inManagedObjectContext:[[NTEHandlerProvider coreDataHandler] managedObjectContext]];
     
     // save the managed object context
     [[NTEHandlerProvider coreDataHandler] saveManagedObjectContext];
 }
+
+#pragma mark - view mode methods
+
+- (void)saveExistingNote {
+    // return if user didn't change anything
+    if ([self.existingNote.title isEqualToString:self.titleTextField.text] && [self.existingNote.body isEqualToString:self.bodyTextView.text]) {
+        return;
+    }
+    
+    NSString *trimmedTitle = [self.titleTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *trimmedBody = [self.bodyTextView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    // delete note if both fields are blank
+    if ([trimmedTitle isEqualToString:@""] && [trimmedBody isEqualToString:@""]) {
+        [[NTEHandlerProvider noteHandler] deleteNote:self.existingNote inManagedObjectContext:[[NTEHandlerProvider coreDataHandler] managedObjectContext]];
+        [[NTEHandlerProvider coreDataHandler] saveManagedObjectContext];
+        return;
+    }
+    
+    // set default title if needed
+    if ([trimmedTitle isEqualToString:@""]) {
+        trimmedTitle = [NSString stringWithFormat:@"Untitled"];
+    }
+    
+    // update the note
+    self.existingNote.title = trimmedTitle;
+    self.existingNote.body = trimmedBody;
+    self.existingNote.modifiedAt = [NSDate date];
+    
+    // save the managed object context
+    [[NTEHandlerProvider coreDataHandler] saveManagedObjectContext];
+}
+
+- (void)editButtonWasTapped:(id)sender {
+    
+}
+
+
+#pragma mark - edit mode methods
+
 
 #pragma mark - text view delegate methods
 
@@ -123,8 +172,14 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
+    [self hideTapToEditLabelIfNeeded];
+}
+
+#pragma mark - other methods
+
+- (void)hideTapToEditLabelIfNeeded {
     // hide tap to edit label if user input text
-    if (textView.text.length > 0) {
+    if (self.bodyTextView.text.length > 0) {
         self.tapToEditLabel.hidden = YES;
     }
     else {

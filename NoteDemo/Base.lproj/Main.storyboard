@@ -13,23 +13,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ruid_noteCell" textLabel="HVq-Li-FPh" style="IBUITableViewCellStyleDefault" id="GBR-pc-M5d">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ruid_noteCell" rowHeight="70" id="GBR-pc-M5d" customClass="NTENoteTableViewCell">
+                                <rect key="frame" x="0.0" y="86" width="320" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GBR-pc-M5d" id="9lV-Dy-1uN">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="69"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HVq-Li-FPh">
-                                            <rect key="frame" x="15" y="0.0" width="270" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPd-HT-gb9">
+                                            <rect key="frame" x="15" y="13" width="267" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="aFO-hF-Egj"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is the body of the note" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FfP-in-2tb">
+                                            <rect key="frame" x="15" y="35" width="267" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="vPd-HT-gb9" firstAttribute="leading" secondItem="9lV-Dy-1uN" secondAttribute="leading" constant="15" id="7U0-IH-Dlb"/>
+                                        <constraint firstItem="FfP-in-2tb" firstAttribute="trailing" secondItem="vPd-HT-gb9" secondAttribute="trailing" id="Ekv-n7-YsQ"/>
+                                        <constraint firstItem="FfP-in-2tb" firstAttribute="top" secondItem="vPd-HT-gb9" secondAttribute="bottom" constant="1" id="STV-ws-ifB"/>
+                                        <constraint firstAttribute="bottom" secondItem="FfP-in-2tb" secondAttribute="bottom" constant="13" id="fJg-G3-r1T"/>
+                                        <constraint firstAttribute="trailing" secondItem="vPd-HT-gb9" secondAttribute="trailing" constant="5" id="ocv-Z9-V3k"/>
+                                        <constraint firstItem="FfP-in-2tb" firstAttribute="leading" secondItem="vPd-HT-gb9" secondAttribute="leading" id="r5M-YJ-xIW"/>
+                                        <constraint firstItem="vPd-HT-gb9" firstAttribute="top" secondItem="9lV-Dy-1uN" secondAttribute="top" constant="13" id="vBa-cw-p3L"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="bodyTextField" destination="FfP-in-2tb" id="aYw-sM-BKz"/>
+                                    <outlet property="titleTextField" destination="vPd-HT-gb9" id="mUc-X5-SB5"/>
                                     <segue destination="Kt4-s7-8ee" kind="push" identifier="seg_viewNote" id="i2r-ZQ-FRh"/>
                                 </connections>
                             </tableViewCell>

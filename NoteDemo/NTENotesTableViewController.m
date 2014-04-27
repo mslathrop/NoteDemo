@@ -17,6 +17,12 @@
 // Models
 #import "NTENote.h"
 
+// Other
+#import "NTEConstants.h"
+
+// Views
+#import "NTENoteTableViewCell.h"
+
 @interface NTENotesTableViewController ()
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
@@ -61,7 +67,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *reuseIdentifier = @"ruid_noteCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    NTENoteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
@@ -79,11 +85,16 @@
     [[NTEHandlerProvider coreDataHandler] saveManagedObjectContext];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return kNTENoteTableViewCellHeight;
+}
+
 #pragma mark - cell drawing methods
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(NTENoteTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     NTENote *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = note.title;
+    cell.titleTextField.text = note.title;
+    cell.bodyTextField.text = note.body;
 }
 
 #pragma mark - fetched results controller delegate methods
@@ -129,7 +140,7 @@
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath]
+            [self configureCell:(NTENoteTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]
                     atIndexPath:indexPath];
             break;
             

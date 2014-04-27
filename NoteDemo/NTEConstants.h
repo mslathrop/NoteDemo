@@ -11,4 +11,7 @@ extern NSString *const kNTECoreDataStoreProdName;
 extern NSString *const kNTECoreDataStoreTestName;
 extern NSString *const kNTECoreDataModelName;
 
+#pragma mark - Note table view constants
+const CGFloat kNTENoteTableViewCellHeight;
+
 

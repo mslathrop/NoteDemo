@@ -51,6 +51,8 @@
 		6603A93B190C8CEC0033CB0E /* NTENoteDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A939190C8CEC0033CB0E /* NTENoteDetailViewController.m */; };
 		6603A93E190CB7460033CB0E /* NTEHandlerProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A93D190CB7460033CB0E /* NTEHandlerProvider.m */; };
 		6603A93F190CB7460033CB0E /* NTEHandlerProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A93D190CB7460033CB0E /* NTEHandlerProvider.m */; };
+		6603A942190D731E0033CB0E /* NTENoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A941190D731E0033CB0E /* NTENoteTableViewCell.m */; };
+		6603A943190D731E0033CB0E /* NTENoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A941190D731E0033CB0E /* NTENoteTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +103,8 @@
 		6603A939190C8CEC0033CB0E /* NTENoteDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTENoteDetailViewController.m; sourceTree = "<group>"; };
 		6603A93C190CB7460033CB0E /* NTEHandlerProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTEHandlerProvider.h; sourceTree = "<group>"; };
 		6603A93D190CB7460033CB0E /* NTEHandlerProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTEHandlerProvider.m; sourceTree = "<group>"; };
+		6603A940190D731E0033CB0E /* NTENoteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTENoteTableViewCell.h; sourceTree = "<group>"; };
+		6603A941190D731E0033CB0E /* NTENoteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTENoteTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,7 +170,6 @@
 				6603A8D5190C375D0033CB0E /* NTEAppDelegate.m */,
 				6603A90A190C4F350033CB0E /* NTEConstants.h */,
 				6603A90B190C4F350033CB0E /* NTEConstants.m */,
-				6603A8D7190C375D0033CB0E /* Main.storyboard */,
 				6603A8FA190C3C7C0033CB0E /* Models */,
 				6603A8FC190C3C870033CB0E /* Controllers */,
 				6603A900190C43120033CB0E /* Protocols */,
@@ -222,6 +225,9 @@
 		6603A8FB190C3C830033CB0E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6603A8D7190C375D0033CB0E /* Main.storyboard */,
+				6603A940190D731E0033CB0E /* NTENoteTableViewCell.h */,
+				6603A941190D731E0033CB0E /* NTENoteTableViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -379,6 +385,7 @@
 				6603A922190C68460033CB0E /* NTENote.m in Sources */,
 				6603A8FF190C3CD30033CB0E /* NTENotesTableViewController.m in Sources */,
 				6603A8D2190C375D0033CB0E /* main.m in Sources */,
+				6603A942190D731E0033CB0E /* NTENoteTableViewCell.m in Sources */,
 				6603A909190C4E990033CB0E /* NoteDemoModel.xcdatamodeld in Sources */,
 				6603A904190C448F0033CB0E /* NTECoreDataHandler.m in Sources */,
 				6603A93A190C8CEC0033CB0E /* NTENoteDetailViewController.m in Sources */,
@@ -400,6 +407,7 @@
 				6603A93B190C8CEC0033CB0E /* NTENoteDetailViewController.m in Sources */,
 				6603A923190C68460033CB0E /* NTENote.m in Sources */,
 				6603A90E190C51C20033CB0E /* NTEConstants.m in Sources */,
+				6603A943190D731E0033CB0E /* NTENoteTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

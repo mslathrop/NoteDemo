@@ -12,3 +12,6 @@
 NSString *const kNTECoreDataStoreProdName = @"NoteDemoProd.sqlite";
 NSString *const kNTECoreDataStoreTestName = @"NoteDemoTest.sqlite";
 NSString *const kNTECoreDataModelName = @"NoteDemoModel";
+
+#pragma mark - Note table view constants
+const CGFloat kNTENoteTableViewCellHeight = 70.0f;

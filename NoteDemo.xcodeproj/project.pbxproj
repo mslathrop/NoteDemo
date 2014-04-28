@@ -53,6 +53,8 @@
 		6603A93F190CB7460033CB0E /* NTEHandlerProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A93D190CB7460033CB0E /* NTEHandlerProvider.m */; };
 		6603A942190D731E0033CB0E /* NTENoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A941190D731E0033CB0E /* NTENoteTableViewCell.m */; };
 		6603A943190D731E0033CB0E /* NTENoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6603A941190D731E0033CB0E /* NTENoteTableViewCell.m */; };
+		6603AB02190D91CB0033CB0E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6603AB01190D91CB0033CB0E /* SystemConfiguration.framework */; };
+		6603AB07190D93A80033CB0E /* libFlurry_4.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6603AB06190D93A80033CB0E /* libFlurry_4.4.0.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +108,9 @@
 		6603A940190D731E0033CB0E /* NTENoteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTENoteTableViewCell.h; sourceTree = "<group>"; };
 		6603A941190D731E0033CB0E /* NTENoteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTENoteTableViewCell.m; sourceTree = "<group>"; };
 		6603A944190D79840033CB0E /* NoteDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NoteDemo.entitlements; sourceTree = "<group>"; };
+		6603AB01190D91CB0033CB0E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6603AB05190D93A80033CB0E /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		6603AB06190D93A80033CB0E /* libFlurry_4.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.4.0.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +118,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6603AB02190D91CB0033CB0E /* SystemConfiguration.framework in Frameworks */,
 				6603A906190C44C40033CB0E /* CoreData.framework in Frameworks */,
+				6603AB07190D93A80033CB0E /* libFlurry_4.4.0.a in Frameworks */,
 				6603A8C8190C375D0033CB0E /* CoreGraphics.framework in Frameworks */,
 				6603A8CA190C375D0033CB0E /* UIKit.framework in Frameworks */,
 				6603A8C6190C375D0033CB0E /* Foundation.framework in Frameworks */,
@@ -155,6 +162,7 @@
 		6603A8C4190C375D0033CB0E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6603AB01190D91CB0033CB0E /* SystemConfiguration.framework */,
 				6603A905190C44C40033CB0E /* CoreData.framework */,
 				6603A8C5190C375D0033CB0E /* Foundation.framework */,
 				6603A8C7190C375D0033CB0E /* CoreGraphics.framework */,
@@ -173,6 +181,7 @@
 				6603A90B190C4F350033CB0E /* NTEConstants.m */,
 				6603A8FC190C3C870033CB0E /* Controllers */,
 				6603A901190C44650033CB0E /* Handlers */,
+				6603AB03190D928D0033CB0E /* Libraries */,
 				6603A8FA190C3C7C0033CB0E /* Models */,
 				6603A900190C43120033CB0E /* Protocols */,
 				6603A8FB190C3C830033CB0E /* Views */,
@@ -267,6 +276,23 @@
 			name = Handlers;
 			sourceTree = "<group>";
 		};
+		6603AB03190D928D0033CB0E /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				6603AB04190D93A80033CB0E /* Flurry */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		6603AB04190D93A80033CB0E /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				6603AB05190D93A80033CB0E /* Flurry.h */,
+				6603AB06190D93A80033CB0E /* libFlurry_4.4.0.a */,
+			);
+			path = Flurry;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -275,8 +301,8 @@
 			buildConfigurationList = 6603A8F4190C375D0033CB0E /* Build configuration list for PBXNativeTarget "NoteDemo" */;
 			buildPhases = (
 				6603A8BE190C375D0033CB0E /* Sources */,
-				6603A8BF190C375D0033CB0E /* Frameworks */,
 				6603A8C0190C375D0033CB0E /* Resources */,
+				6603A8BF190C375D0033CB0E /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -540,6 +566,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NoteDemo/NoteDemo-Prefix.pch";
 				INFOPLIST_FILE = "NoteDemo/NoteDemo-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/NoteDemo/Flurry",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -557,6 +587,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NoteDemo/NoteDemo-Prefix.pch";
 				INFOPLIST_FILE = "NoteDemo/NoteDemo-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/NoteDemo/Flurry",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -579,6 +613,11 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "NoteDemoTests/NoteDemoTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/NoteDemo/Flurry-iOS-4.4.0/Flurry",
+					"$(PROJECT_DIR)/NoteDemo/Flurry-iOS-4.4.0/FlurryAds",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -597,6 +636,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NoteDemo/NoteDemo-Prefix.pch";
 				INFOPLIST_FILE = "NoteDemoTests/NoteDemoTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/NoteDemo/Flurry-iOS-4.4.0/Flurry",
+					"$(PROJECT_DIR)/NoteDemo/Flurry-iOS-4.4.0/FlurryAds",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

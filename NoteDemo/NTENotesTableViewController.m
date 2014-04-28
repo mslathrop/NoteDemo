@@ -48,8 +48,13 @@
 {
     [super viewDidLoad];
     
+    // set nav bar appearance
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:180.0/255.0 blue:1.0 alpha:0];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    
+    // perfrom fetch of data
     [self reloadFetchResults];
-    [self.tableView reloadData];
 }
 
 #pragma mark - table view data source methods

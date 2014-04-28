@@ -8,6 +8,12 @@
 
 #import "NTEAppDelegate.h"
 
+// Handlers
+#import "NTEHandlerProvider.h"
+
+// Libraries
+#import "Flurry.h"
+
 @interface NTEAppDelegate ()
 
 @end
@@ -16,7 +22,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [Flurry setCrashReportingEnabled:YES];
+    [Flurry startSession:@"FMVG85QTK3FW86TTTFVW"];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     return YES;
 }
 							

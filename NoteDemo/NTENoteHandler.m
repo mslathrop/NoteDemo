@@ -8,6 +8,9 @@
 
 #import "NTENoteHandler.h"
 
+// Libraries
+#import "FLurry.h"
+
 // Models
 #import "NTENote.h"
 
@@ -16,11 +19,14 @@
 - (NTENote *)newNoteWithTitle:(NSString *)title body:(NSString *)body inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
     NSAssert(managedObjectContext != nil, @"managedObjectContext cannot be null");
     
+    [Flurry logEvent:@"Note_Created"];
+    
     NTENote *ret = [NTENote insertInManagedObjectContext:managedObjectContext];
     ret.body = body;
     ret.title = title;
     ret.entityId = [[NSUUID UUID] UUIDString];
     ret.createdAt = ret.modifiedAt = [NSDate date];
+    
     return ret;
 }
 
@@ -55,6 +61,8 @@
 - (void)deleteNote:(NTENote *)note inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
     NSAssert(note != nil, @"note cannot be null");
     NSAssert(managedObjectContext != nil, @"managedObjectContext cannot be null");
+    
+    [Flurry logEvent:@"Note_Deleted"];
     
     [managedObjectContext deleteObject:note];
 }

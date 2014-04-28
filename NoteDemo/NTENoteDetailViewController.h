@@ -18,7 +18,6 @@
 typedef enum {
     NTENewNoteDetailViewMode,
     NTEViewNoteDetailViewMode,
-    NTEEditDetailViewMode,
     NTENilDetailViewMode
 } NTENoteDetailViewMode;
 

@@ -8,13 +8,18 @@
 
 #import "NTENoteDetailViewController.h"
 
-// Models
-#import "NTENote.h"
-
 // Handlers
 #import "NTEHandlerProvider.h"
 
+// Libraries
+#import "Flurry.h"
+
+// Models
+#import "NTENote.h"
+
 @interface NTENoteDetailViewController ()
+
+@property (nonatomic, assign, getter = isSaveNeeded) BOOL saveNeeded;
 
 @end
 
@@ -25,6 +30,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         _noteDetailViewMode = NTENilDetailViewMode;
+        _saveNeeded = NO;
     }
     return self;
 }
@@ -44,7 +50,21 @@
     [self configureNoteDetailView];
     
     // fix default content inset
-    self.bodyTextView.contentInset = UIEdgeInsetsMake(0,-4,0,-4);
+    self.bodyTextView.contentInset = UIEdgeInsetsMake(-10,-4,0,-4);
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -59,11 +79,20 @@
             [self saveExistingNote];
             break;
             
-        case NTEEditDetailViewMode:
+        default:
             break;
-            
-        case NTENilDetailViewMode:
-            break;
+    }
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    // saving the context here eliminates lag in the ui
+    if (self.isSaveNeeded) {
+        [[NTEHandlerProvider coreDataHandler] saveManagedObjectContext];
     }
 }
 
@@ -78,9 +107,11 @@
 
 - (void)configureNavigationItems {
     switch (self.noteDetailViewMode) {
-        case NTEEditDetailViewMode:
+        case NTEViewNoteDetailViewMode:
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                                                   target:self
+                                                                                                   action:@selector(actionButtonTapped:)];
             break;
-            
         default:
             break;
     }
@@ -111,6 +142,8 @@
         return;
     }
     
+    self.saveNeeded = YES;
+    
     // set default title if needed
     if ([trimmedTitle isEqualToString:@""]) {
         trimmedTitle = [NSString stringWithFormat:@"Untitled"];
@@ -120,9 +153,6 @@
     [[NTEHandlerProvider noteHandler] newNoteWithTitle:trimmedTitle
                                                   body:trimmedBody
                                 inManagedObjectContext:[[NTEHandlerProvider coreDataHandler] managedObjectContext]];
-    
-    // save the managed object context
-    [[NTEHandlerProvider coreDataHandler] saveManagedObjectContext];
 }
 
 #pragma mark - view mode methods
@@ -133,13 +163,14 @@
         return;
     }
     
+    self.saveNeeded = YES;
+    
     NSString *trimmedTitle = [self.titleTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString *trimmedBody = [self.bodyTextView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     // delete note if both fields are blank
     if ([trimmedTitle isEqualToString:@""] && [trimmedBody isEqualToString:@""]) {
         [[NTEHandlerProvider noteHandler] deleteNote:self.existingNote inManagedObjectContext:[[NTEHandlerProvider coreDataHandler] managedObjectContext]];
-        [[NTEHandlerProvider coreDataHandler] saveManagedObjectContext];
         return;
     }
     
@@ -153,17 +184,30 @@
     self.existingNote.body = trimmedBody;
     self.existingNote.modifiedAt = [NSDate date];
     
-    // save the managed object context
-    [[NTEHandlerProvider coreDataHandler] saveManagedObjectContext];
+    // track edit in flurry
+    [Flurry logEvent:@"Note_Edited"];
 }
 
-- (void)editButtonWasTapped:(id)sender {
+- (void)actionButtonTapped:(id)sender {
+    // there is a log sometimes when opening the activity view controller. this will account for that
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [activityIndicator startAnimating];
     
+    self.navigationItem.rightBarButtonItem.customView = activityIndicator;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[[NSString stringWithFormat:@"%@:\n\n%@",
+                                                                                                                      self.titleTextField.text,
+                                                                                                                      self.bodyTextView.text]]
+                                                                                             applicationActivities:nil];
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+            self.navigationItem.rightBarButtonItem.customView = nil;
+            [self.navigationController presentViewController:activityViewController
+                                                    animated:YES
+                                                  completion:^{}];
+        });
+    });
 }
-
-
-#pragma mark - edit mode methods
-
 
 #pragma mark - text view delegate methods
 
@@ -175,7 +219,61 @@
     [self hideTapToEditLabelIfNeeded];
 }
 
+- (void)textViewDidChange:(UITextView *)textView {
+    [self showTextViewCaretPosition:textView];
+}
+
+- (void)textViewDidChangeSelection:(UITextView *)textView {
+    [self showTextViewCaretPosition:textView];
+}
+
+- (void)showTextViewCaretPosition:(UITextView *)textView {
+    CGRect caretRect = [textView caretRectForPosition:textView.selectedTextRange.end];
+    [textView scrollRectToVisible:caretRect animated:NO];
+}
+
+#pragma mark - Keyboard notifications
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    CGRect keyboardFrame = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    NSTimeInterval animationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    BOOL isPortrait = UIDeviceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation);
+    CGFloat keyboardHeight = isPortrait ? keyboardFrame.size.height : keyboardFrame.size.width;
+    
+    UIEdgeInsets contentInset = self.bodyTextView.contentInset;
+    contentInset.bottom = keyboardHeight;
+    
+    
+    UIEdgeInsets scrollIndicatorInsets = self.bodyTextView.scrollIndicatorInsets;
+    scrollIndicatorInsets.bottom = keyboardHeight;
+    
+    [UIView animateWithDuration:animationDuration animations:^{
+        self.bodyTextView.contentInset = contentInset;
+        self.bodyTextView.scrollIndicatorInsets = scrollIndicatorInsets;
+    }];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    NSTimeInterval animationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    UIEdgeInsets contentInset = self.bodyTextView.contentInset;
+    contentInset.bottom = 0;
+    
+    UIEdgeInsets scrollIndicatorInsets = self.bodyTextView.scrollIndicatorInsets;
+    scrollIndicatorInsets.bottom = 0;
+    
+    [UIView animateWithDuration:animationDuration animations:^{
+        self.bodyTextView.contentInset = contentInset;
+        self.bodyTextView.scrollIndicatorInsets = scrollIndicatorInsets;
+    }];
+}
+
 #pragma mark - other methods
+
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    [self showTextViewCaretPosition:self.bodyTextView];
+}
 
 - (void)hideTapToEditLabelIfNeeded {
     // hide tap to edit label if user input text
